@@ -16,10 +16,13 @@ const MapComponent = () => {
 
   // لود کردن فایل GeoJSON
   useEffect(() => {
-    fetch(process.env.PUBLIC_URL + "/countries.geojson")
-      .then((res) => res.json())
-      .then((data) => setIranGeoJSON(data))
-      .catch((err) => console.error("خطا در دریافت GeoJSON:", err));
+    fetch(import.meta.env.BASE_URL + "countries.geojson")
+  .then((res) => res.json())
+  .then((data) => {
+    // پردازش داده‌ها
+  })
+  .catch((err) => console.error("خطا در دریافت GeoJSON:", err));
+
   }, []);
   
   
