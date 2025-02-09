@@ -7,8 +7,8 @@ body {
 
 
 .map-container {
-  height: 90vh;
-  width: 90vw;
+  height: 100vh;
+  width: 100%;
   margin: 20px auto;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   border-radius: 20px;
@@ -29,7 +29,7 @@ body {
 
 .popup-btn {
   background: #ff4500;
-  color: white;
+  color: white !important;
   border: none;
   padding: 8px 15px;
   border-radius: 5px;
@@ -37,6 +37,7 @@ body {
   margin-top: 10px;
   width: 100%;
   font-family: 'Sahel', sans-serif;
+  text-decoration: none;
 }
 
 

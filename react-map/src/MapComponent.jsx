@@ -7,8 +7,8 @@ import CustomsMarkers from "./CustomsMarkers";
 
 // تنظیم محدوده نمایش فقط برای ایران
 const iranBounds = L.latLngBounds(
-  L.latLng(25, 44), // جنوب غربی
-  L.latLng(40, 63)  // شمال شرقی
+  L.latLng(20, 40), // جنوب غربی
+  L.latLng(45, 70)  // شمال شرقی
 );
 
 const MapComponent = () => {
@@ -19,14 +19,11 @@ const MapComponent = () => {
     fetch("/countries.geojson")
       .then((res) => res.json())
       .then((data) => {
-        console.log("GeoJSON Data:", data);
-        
         // پیدا کردن تمام featureهایی که شامل 'Iran' هستند
         const possibleIran = data.features.filter(feature =>
           JSON.stringify(feature.properties).includes("Iran")
         );
-        console.log("Features with 'Iran':", possibleIran);
-        
+
         // در صورتی که حداقل یک ویژگی پیدا شد، state را به روز کنید
         if (possibleIran.length > 0) {
           setIranGeoJSON(possibleIran[0]); // یا بسته به نیاز، ممکن است کل FeatureCollection را بسازید
@@ -39,11 +36,11 @@ const MapComponent = () => {
   
   return (
     <MapContainer
-      center={[32, 54]} // مرکز نقشه روی ایران
-      zoom={5}
-      minZoom={5}
+      center={[33, 62]}
+      zoom={6}
+      minZoom={6}
       maxBounds={iranBounds}
-      maxBoundsViscosity={0.8}
+      maxBoundsViscosity={0.2}
       className="map-container"
     >
       {/* لایه‌ی سفارشی برای نمایش ساده‌تر */}
