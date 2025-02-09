@@ -16,21 +16,12 @@ const MapComponent = () => {
 
   // لود کردن فایل GeoJSON
   useEffect(() => {
-    fetch("/countries.geojson")
+    fetch(process.env.PUBLIC_URL + "/countries.geojson")
       .then((res) => res.json())
-      .then((data) => {
-        // پیدا کردن تمام featureهایی که شامل 'Iran' هستند
-        const possibleIran = data.features.filter(feature =>
-          JSON.stringify(feature.properties).includes("Iran")
-        );
-
-        // در صورتی که حداقل یک ویژگی پیدا شد، state را به روز کنید
-        if (possibleIran.length > 0) {
-          setIranGeoJSON(possibleIran[0]); // یا بسته به نیاز، ممکن است کل FeatureCollection را بسازید
-        }
-      })
-      .catch((err) => console.error("خطا در دریافت فایل GeoJSON:", err));
+      .then((data) => setIranGeoJSON(data))
+      .catch((err) => console.error("خطا در دریافت GeoJSON:", err));
   }, []);
+  
   
   
   
