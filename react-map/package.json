@@ -1,6 +1,6 @@
 {
   "name": "react-map",
-  "homepage": "https://imonm.github.io/react-map-import-export/",
+  "homepage": "https://imonm.github.io/react-map-import-export/react-map/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -16,7 +16,8 @@
     "leaflet": "^1.9.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-leaflet": "^5.0.0"
+    "react-leaflet": "^5.0.0",
+    "react-router-dom": "^7.1.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
