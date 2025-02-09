@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/react-map-import/',
+  base: '/react-map-import-export',
   build: {
     outDir: 'build',
   },
