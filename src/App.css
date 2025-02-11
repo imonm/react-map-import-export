@@ -28,6 +28,8 @@ body {
 }
 
 .popup-btn {
+  justify-self: center;
+  text-align: center;
   background: #ffac1b;
   color: rgb(255, 255, 255) !important;
   border: none;
@@ -41,6 +43,10 @@ body {
   display: flex;
   justify-content: center;
   align-content: center;
+  transition: all 500ms;
+}
+.popup-btn:hover{
+  scale: 1.1;
 }
 
 
