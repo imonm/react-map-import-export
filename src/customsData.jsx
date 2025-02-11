@@ -5,7 +5,7 @@ import L from "leaflet";
 
 export const customIcon = new L.Icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-  iconSize: [25, 41],
+  iconSize: [20, 30],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34]
 });

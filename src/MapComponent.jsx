@@ -1,63 +1,66 @@
-import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
+import { MapContainer, TileLayer, GeoJSON, Tooltip } from "react-leaflet";
 import { useEffect, useState } from "react";
+import L from "leaflet";
 import "./app.css";
 import "./index.css";
 import CustomsMarkers from "./CustomsMarkers";
 
-
-// تنظیم محدوده نمایش فقط برای ایران
 const iranBounds = L.latLngBounds(
-  L.latLng(20, 40), // جنوب غربی
-  L.latLng(45, 70)  // شمال شرقی
+  L.latLng(20, 40),
+  L.latLng(45, 70)
 );
 
 const MapComponent = () => {
   const [iranGeoJSON, setIranGeoJSON] = useState(null);
 
-  // لود کردن فایل GeoJSON
   useEffect(() => {
-    fetch(import.meta.env.BASE_URL + "countries.geojson")
-  .then((res) => res.json())
-  .then((data) => {
-    // پردازش داده‌ها
-  })
-  .catch((err) => console.error("خطا در دریافت GeoJSON:", err));
-
+    fetch(import.meta.env.BASE_URL + "ir_states_boundaries_coordinates.geojson")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("GeoJSON Data:", data); // برای بررسی ساختار
+        setIranGeoJSON(data);
+      })
+      .catch((err) => console.error("خطا در دریافت GeoJSON:", err));
   }, []);
-  
-  
-  
-  
+
   return (
     <MapContainer
-      center={[33, 62]}
+      center={[33, 54]}
       zoom={6}
       minZoom={6}
       maxBounds={iranBounds}
       maxBoundsViscosity={0.2}
       className="map-container"
     >
-      {/* لایه‌ی سفارشی برای نمایش ساده‌تر */}
       <TileLayer
-  url="https://{s}.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{r}.png"
-  attribution='&copy; OpenStreetMap contributors'
-/>
-      {/* نمایش مرزهای ایران با GeoJSON */}
+        url="https://{s}.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{r}.png"
+        attribution='&copy; OpenStreetMap contributors'
+      />
+
+      {/* نمایش استان‌های ایران */}
       {iranGeoJSON && (
-  <GeoJSON
-    data={iranGeoJSON}
-    style={() => ({
-      fillColor: "#FFA500",
-      color: "red",
-      weight:1.5, 
-      fillOpacity:0.3, 
-      dashArray: "5 5",
-    })}
-  />
-)}
+        <GeoJSON
+          data={iranGeoJSON}
+          style={() => ({
+            fillColor: "lightgreen",
+            color: "green",
+            weight: 1.5,
+            fillOpacity: 0.4,
+            dashArray: "3 3",
+          })}
+          onEachFeature={(feature, layer) => {
+            const provinceName = feature.properties.name; // نام استان
+            if (provinceName) {
+              layer.bindTooltip(provinceName, {
+                permanent: true,
+                direction: "center",
+                className: "province-label",
+              });
+            }
+          }}
+        />
+      )}
 
-
-      {/* نمایش گمرک‌ها */}
       <CustomsMarkers />
     </MapContainer>
   );
