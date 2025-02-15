@@ -17,7 +17,6 @@ const MapComponent = () => {
     fetch(import.meta.env.BASE_URL + "ir_states_boundaries_coordinates.geojson")
       .then((res) => res.json())
       .then((data) => {
-        console.log("GeoJSON Data:", data); // برای بررسی ساختار
         setIranGeoJSON(data);
       })
       .catch((err) => console.error("خطا در دریافت GeoJSON:", err));
